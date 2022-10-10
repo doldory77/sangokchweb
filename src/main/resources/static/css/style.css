@@ -1,0 +1,12 @@
+#nav-top {
+    text-align: center;
+}
+.menu-item1 {
+    text-decoration: none;
+    padding: 0 10px;
+    display: inline-block;
+    border-right: 2px solid gray;
+}
+.menu-item1:last-of-type {
+    border-right: none;
+}

@@ -1,0 +1,1 @@
+const Help = {template: `<div>Help</div>`}

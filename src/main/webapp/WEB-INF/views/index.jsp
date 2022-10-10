@@ -13,44 +13,60 @@
     <script src="https://unpkg.com/vue-router@4"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/home/Home.js"></script>
+    <script src="/js/etc/Temp.js"></script>
     <script src="/js/util/Comm.js"></script>
     <script src="/js/comp/FileX.js"></script>
-    <script src="/js/home/Home.js"></script>
     <script src="/js/board/Board.js"></script>
-    <script src="/js/help/Help.js"></script>
+    <script src="/js/menu01/Menu0101.js"></script>
+    <script src="/js/menu01/Menu0102.js"></script>
+    <script src="/js/menu01/Menu0103.js"></script>
+    <script src="/js/menu02/Menu0201.js"></script>
+    <script src="/js/menu02/Menu0202.js"></script>
+    <script src="/js/menu02/Menu0203.js"></script>
+    <script src="/js/menu04/Menu0401.js"></script>
 </head>
 <body>
     <div id="app">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container-lg">
+                <a class="navbar-brand" href="#">산곡성결교회</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <router-link class="nav-link active" to="/">HOME</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link" :to="{name:'Board', query:{boardKind:'A1'}}">BOARD</router-link>
-                        </li>
-                        <li class="nav-item">
-                            <router-link class="nav-link" to="/help">HELP</router-link>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              교회소개
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                                <li><router-link class="dropdown-item" to="/menu0101">우리교회는?</router-link></li>
+                                <li><router-link class="dropdown-item" to="/menu0102">교회섬김이</router-link></li>
+                                <li><router-link class="dropdown-item" to="/menu0102">오시는 길</router-link></li>
+                            </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Dropdown link
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              예배
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+                                <li><router-link class="dropdown-item" to="/menu0201">예배안내</router-link></li>
+                                <li><router-link class="dropdown-item" to="/menu0202">교회주보</router-link></li>
+                                <li><router-link class="dropdown-item" to="/menu0202">주일설교</router-link></li>  
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
+                            <router-link class="nav-link" to="/temp" disabled>교회학교</router-link>
+                        </li>
+                        <li class="nav-item dropdown disabled">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              교제와나눔
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
+                                <li><router-link class="dropdown-item" to="/menu0401">교회소식</router-link></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -60,6 +76,17 @@
         <router-view></router-view>
         
     </div>
+
+    <footer class="text-muted py-5">
+        <div class="container">
+            <p class="float-end mb-1">
+                <a href="#">Back to top</a>
+            </p>
+            <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
+            <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.1/getting-started/introduction/">getting started guide</a>.</p>
+        </div>
+    </footer>
+
 </body>
 <script>
     const {createApp} = Vue
@@ -69,8 +96,16 @@
         history: createWebHashHistory(),
         routes: [
             {name:'Home', path:'/', component:Home},
-            {name:'Board', path:'/board', component:Board},
-            {name:'Help', path:'/help', component:Help}
+            {name:'Temp', path:'/temp', component:Temp},
+            {name:'Menu0101', path:'/menu0101', component:Menu0101},
+            {name:'Menu0102', path:'/menu0102', component:Menu0102},
+            {name:'Menu0103', path:'/menu0103', component:Menu0103},
+            {name:'Menu0201', path:'/menu0201', component:Menu0201},
+            {name:'Menu0202', path:'/menu0202', component:Menu0202},
+            {name:'Menu0203', path:'/menu0203', component:Menu0203},
+            {name:'Menu03', path:'/menu03', component:Temp},
+            {name:'Menu0401', path:'/menu0401', component:Menu0401},
+            
         ]
     })
     const http = axios.create({

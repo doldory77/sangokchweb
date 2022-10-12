@@ -19,6 +19,7 @@
     <script src="/js/util/Comm.js"></script>
     <script src="/js/comp/FileX.js"></script>
     <script src="/js/board/Board.js"></script>
+    <script src="/js/board/BoardDetailView.js"></script>
     <script src="/js/menu01/Menu0101.js"></script>
     <script src="/js/menu01/Menu0102.js"></script>
     <script src="/js/menu01/Menu0103.js"></script>
@@ -28,7 +29,7 @@
     <script src="/js/menu04/Menu0401.js"></script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" style="padding-top: 56px;">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container-lg">
@@ -98,6 +99,7 @@
         routes: [
             {name:'Home', path:'/', component:Home},
             {name:'Temp', path:'/temp', component:Temp},
+            {name:'BoardDetailView', path:'/boardDetailView', component:BoardDetailView},
             {name:'Menu0101', path:'/menu0101', component:Menu0101},
             {name:'Menu0102', path:'/menu0102', component:Menu0102},
             {name:'Menu0103', path:'/menu0103', component:Menu0103},

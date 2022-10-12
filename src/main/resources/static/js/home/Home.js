@@ -1,6 +1,6 @@
 const Home = {
     template: `
-        <div class="d-flex justify-content-center mt-5 pt-md-5 bg-light">
+        <div class="d-flex justify-content-center pt-md-5 bg-light">
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="max-width:800px;">
                 <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

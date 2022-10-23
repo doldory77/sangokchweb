@@ -1,17 +1,22 @@
 package org.sangokch.model;
 
+import java.util.List;
+
 public class Board {
 
 	public int bno;
 	public String kind_cd;
 	public String subject;
 	public String content;
+	public String tag_yn;
+	public String link_url;
 	public int view_cnt;
-	public String del_yn;
+	public String use_yn;
 	public String writer;
 	public String write_dt;
 	public String modifier;
 	public String modified_dt;
+	public List<AttchFile> attchFiles;
 	
 	public int getBno() {
 		return bno;
@@ -31,11 +36,23 @@ public class Board {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
+	public String getTag_yn() {
+		return tag_yn;
+	}
+	public void setTag_yn(String tag_yn) {
+		this.tag_yn = tag_yn;
+	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getLink_url() {
+		return link_url;
+	}
+	public void setLink_url(String link_url) {
+		this.link_url = link_url;
 	}
 	public int getView_cnt() {
 		return view_cnt;
@@ -43,11 +60,11 @@ public class Board {
 	public void setView_cnt(int view_cnt) {
 		this.view_cnt = view_cnt;
 	}
-	public String getDel_yn() {
-		return del_yn;
+	public String getUse_yn() {
+		return use_yn;
 	}
-	public void setDel_yn(String del_yn) {
-		this.del_yn = del_yn;
+	public void setUse_yn(String use_yn) {
+		this.use_yn = use_yn;
 	}
 	public String getWriter() {
 		return writer;
@@ -72,6 +89,12 @@ public class Board {
 	}
 	public void setModified_dt(String modified_dt) {
 		this.modified_dt = modified_dt;
+	}
+	public List<AttchFile> getAttchFiles() {
+		return attchFiles;
+	}
+	public void setAttchFiles(List<AttchFile> attchFiles) {
+		this.attchFiles = attchFiles;
 	}
 	
 	

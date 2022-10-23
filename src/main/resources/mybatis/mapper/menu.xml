@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+                        
+<mapper namespace="org.sangokch.mapper.MenuMapper">
+	<select id="selectMenu" parameterType="hashmap" resultType="Menu">
+		SELECT
+			menu_cd,
+			parent_menu_cd,
+			menu_nm,
+			url,
+			use_yn,
+			ord_no,
+			attr1
+		FROM menu
+		WHERE 1=1
+		<if test='menu_cd neq null and menu_cd neq ""'>
+		AND menu_cd = #{menu_cd}
+		</if>
+		<if test='parent_menu_cd neq null and parent_menu_cd neq ""'>
+		AND parent_menu_cd = #{parent_menu_cd}	
+		</if>
+	</select>
+	<select id="selectAuthMenu" resultType="Menu">
+		SELECT
+			a.menu_cd,
+			a.parent_menu_cd,
+			a.menu_nm,
+			a.url,
+			a.use_yn,
+			b.ord_no AS p_ord_no,
+			a.ord_no,
+			a.attr1
+		FROM menu a
+			, menu b
+		WHERE a.parent_menu_cd = b.menu_cd
+			AND a.require_auth_yn = 'Y'
+		ORDER BY b.ord_no, a.ord_no	
+	</select>
+	<insert id="insertMenu" parameterType="Menu">
+		INSERT INTO menu (
+			menu_cd,
+			parent_menu_cd,
+			menu_nm,
+		<if test='attr1 neq null and attr1 neq ""'>
+			attr1
+		</if>
+		) VALUES (
+			#{menu_cd},
+			IFNULL(#{parent_menu_cd}, LPAD('0', 8, '0')),
+			#{menu_nm},
+		<if test='attr1 neq null and attr1 neq ""'>
+			#{attr1}
+		</if>
+		)	
+	</insert>
+	<update id="updateMenu" parameterType="Menu">
+		UPDATE menu SET
+		<if test='parent_menu_cd neq null and parent_menu_cd neq ""'>
+			parent_menu_cd = #{parent_menu_cd},
+		</if>
+		<if test='menu_nm neq null and menu_nm neq ""'>
+			menu_nm = #{menu_nm},
+		</if>
+		<if test='url neq null and url neq ""'>
+			url = #{url},
+		</if>
+		<if test='use_yn neq null and use_yn neq ""'>
+			use_yn = #{use_yn},
+		</if>
+		<if test='ord_no neq null and ord_no neq ""'>
+			ord_no = #{ord_no},
+		</if>
+		<if test='require_auth_yn neq null and require_auth_yn neq ""'>
+			require_auth_yn = #{require_auth_yn},
+		</if>
+		<if test='attr1 neq null and attr1 neq ""'>
+			attr1 = #{attr1}
+		</if>
+		WHERE menu_cd =	#{menu_cd}
+	</update>
+	
+</mapper>

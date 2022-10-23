@@ -3,11 +3,61 @@
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
                         
 <mapper namespace="org.sangokch.mapper.BoardMapper">
+	<select id="selectBoard" parameterType="hashmap" resultType="Board">
+		SELECT SQL_CALC_FOUND_ROWS
+			a.kind_cd,
+			a.bno,
+			b.menu_nm,
+			a.subject,
+			a.content,
+			a.tag_yn,
+			a.link_url,
+			IFNULL(a.view_cnt, 0) AS view_cnt,
+			a.use_yn,
+			a.writer,
+			date_format(STR_TO_DATE(a.write_dt, '%Y%m%d%H%i%s'), '%Y-%m-%d %H:%i:%s') AS write_dt,
+			a.modifier, 
+			IF(a.modified_dt = null, null, date_format(STR_TO_DATE(a.modified_dt, '%Y%m%d%H%i%s'), '%Y-%m-%d %H:%i:%s')) AS modified_dt 
+		FROM board a
+			, menu b
+		WHERE a.kind_cd = b.menu_cd
+		<if test='use_yn neq null and use_yn neq ""'>
+			AND use_yn = #{use_yn}
+		</if>
+		<if test='bno neq null and bno gt 0'>
+			AND bno = #{bno}
+		</if>
+		<if test='kind_cd neq null and kind_cd neq ""'>
+			AND kind_cd = #{kind_cd}
+		</if>
+		ORDER BY bno desc
+		<if test='pageno neq null and pageno neq ""'>
+		LIMIT #{limit} OFFSET #{offset}
+		</if>				
+	</select>
+	<select id="selectBoardTotalCnt" resultType="int">
+		SELECT FOUND_ROWS() AS totalCnt
+	</select>
+	<select id="selectAttchFile" parameterType="hashmap" resultType="AttchFile">
+		SELECT
+			bno,
+			file_nm,
+			file_org_nm,
+			file_path
+		FROM file
+		WHERE bno = #{bno}
+		<if test='file_nm neq null and file_nm neq ""'>
+			AND file_nm = #{file_nm}
+		</if>
+	</select>
 	<insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="bno">
 		INSERT INTO board (
 			kind_cd
 			,subject
 			,content
+			<if test='link_url neq null and link_url neq ""'>
+			,link_url
+			</if>
 			<if test='writer neq null and writer neq ""'>
 			,writer
 			</if>
@@ -16,12 +66,44 @@
 			#{kind_cd}
 			,#{subject}
 			,#{content}
+			<if test='link_url neq null and link_url neq ""'>
+			,#{link_url}
+			</if>
 			<if test='writer neq null and writer neq ""'>
 			,#{writer}
 			</if>
 			,DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
 		)
 	</insert>
+	<update id="updateBoard" parameterType="Board">
+		UPDATE board SET
+		<if test='kind_cd neq null and kind_cd neq ""'>
+		kind_cd = #{kind_cd},
+		</if>
+		<if test='subject neq null and subject neq ""'>
+		subject = #{subject},
+		</if>
+		<if test='content neq null and content neq ""'>
+		content = #{content},
+		</if>
+		<if test='link_url neq null and link_url neq ""'>
+		link_url = #{link_url},
+		</if>
+		<if test='view_cnt != null'>
+		view_cnt = IFNULL(view_cnt, 0) + 1,
+		</if>
+		<if test='use_yn neq null and use_yn neq ""'>
+		use_yn = #{use_yn},
+		</if>
+		<if test='tag_yn neq null and tag_yn neq ""'>
+		use_yn = #{tag_yn},
+		</if>
+		<if test='modifier neq null and modifier neq ""'>
+		modifier = #{modifier},
+		</if>
+		modified_dt = DATE_FORMAT(SYSDATE(), '%Y%m%d%H%i%s')
+		WHERE bno = #{bno}	
+	</update>
 	<insert id="insertFile" parameterType="AttchFile">
 		INSERT INTO file (
 			bno
@@ -35,4 +117,7 @@
 			,#{file_path}
 		)	
 	</insert>
+	<delete id="deleteFile" parameterType="AttchFile">
+		DELETE FROM file WHERE bno = #{bno} and file_nm = #{file_nm}
+	</delete>
 </mapper>

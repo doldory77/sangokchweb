@@ -1,9 +1,11 @@
 const BoardDetailView = {
   data() {
     return {
+      imgPath:'http://localhost:8081/mng/file/',
       kind:null,
       bno:null,
       boardItem:{subject:'', content:'', attchFiles:[]},
+      mnImg:''
     }
   },
   created() {
@@ -25,18 +27,28 @@ const BoardDetailView = {
         console.log(result)
         if (result.data && result.data.result == 'success') {
           this.boardItem = result.data.data[0]
+          this.mnImg = this.boardItem.attchFiles.length > 0 ? this.imgPath + this.boardItem.attchFiles[0].file_nm : 'https://getbootstrap.kr/docs/5.2/examples/heroes/bootstrap-themes.png'
         }
       } catch (err) {
           console.error(err)
           alert(err.response.data.msg)
       }
+    },
+    chngImg(img) {
+      this.mnImg = this.imgPath + img
     }
   },
   template: `
     <div class="container col-xxl-8 px-4 py-5">
       <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
-          <img :src="boardItem.attchFiles.length > 0 ? 'http://localhost:8081/mng/file/' + boardItem.attchFiles[0].file_nm : 'https://getbootstrap.kr/docs/5.2/examples/heroes/bootstrap-themes.png'" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+
+          <img :src="mnImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+
+          <div class="d-flex flex-nowrap overflow-auto mt-3">
+            <img v-for="file in boardItem.attchFiles" :key="file.file_nm" :src="'http://localhost:8081/mng/file/' + file.file_nm" @click="chngImg(file.file_nm)" class="p-1" style="max-width:100px;">
+          </div>
+
         </div>
         <div class="col-lg-6">
           <h1 class="display-5 fw-bold lh-1 mb-3">{{ boardItem.subject }}</h1>

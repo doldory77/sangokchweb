@@ -3,10 +3,13 @@ package org.sangokch.service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.sangokch.mapper.BoardMapper;
 import org.sangokch.model.AttchFile;
 import org.sangokch.model.Board;
+import org.sangokch.util.Const;
+import org.sangokch.util.MapX;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,17 +40,19 @@ public class BoardService {
 		try {
 			boardMapper.insertBoard(board);
 			System.out.println(board.getBno());
-			for (int i=0; i<files.length; i++) {
-				if (i==1) throw new Exception("일부로 오류 발생시킴");
-				AttchFile file = new AttchFile();
-				file.setBno(board.getBno());
-				file.setFile_nm(fileNames[i]);
-				file.setFile_path(filePath);
-				file.setFile_org_nm(files[i].getOriginalFilename());
-				boardMapper.insertFile(file);
-				File saveFile = new File(file.getFile_path(), file.getFile_nm());
-				files[i].transferTo(saveFile);
-				savedFileList.add(saveFile);
+			if (files != null && files.length > 0) {				
+				for (int i=0; i<files.length; i++) {
+//				if (i==1) throw new Exception("일부로 오류 발생시킴");
+					AttchFile file = new AttchFile();
+					file.setBno(board.getBno());
+					file.setFile_nm(fileNames[i]);
+					file.setFile_path(Const.userDir.concat(filePath));
+					file.setFile_org_nm(files[i].getOriginalFilename());
+					boardMapper.insertFile(file);
+					File saveFile = new File(file.getFile_path(), file.getFile_nm());
+					files[i].transferTo(saveFile);
+					savedFileList.add(saveFile);
+				}
 			}
 		} catch (Exception e) {
 			logger.error("insertBoard Error : ", e);
@@ -57,5 +62,65 @@ public class BoardService {
 			throw new RuntimeException(e.getMessage());
 		}
 	}
+	
+	public List<Board> selectBoard(Map<String, Object> params) {
+		List<Board> boards = null; 
+		if (params.containsKey("bno") || params.containsKey("kind_cd")) {
+			boards = boardMapper.selectBoard(params);
+			for (int i=0; i<boards.size(); i++) {
+				Board board = boards.get(i);
+				List<AttchFile> files = boardMapper.selectAttchFile(new MapX("bno", board.getBno()).getMap());
+				boards.get(i).setAttchFiles(files);
+			}
+		} else {
+			boards = new ArrayList<Board>();
+		}
+		return boards;
+	}
+	
+	public int selectBoardTotalCnt() {
+		return boardMapper.selectBoardTotalCnt();
+	}
+	
+	@Transactional
+	public void updateBoard(Board board, MultipartFile[] files, String[] fileNames) {
+		List<File> savedFileList = new ArrayList<>();
+		try {
+			boardMapper.updateBoard(board);
+			System.out.println(board.getBno());
+			if (files != null && files.length > 0) {				
+				for (int i=0; i<files.length; i++) {
+//				if (i==1) throw new Exception("일부로 오류 발생시킴");
+					AttchFile file = new AttchFile();
+					file.setBno(board.getBno());
+					file.setFile_nm(fileNames[i]);
+					file.setFile_path(Const.userDir.concat(filePath));
+					file.setFile_org_nm(files[i].getOriginalFilename());
+					boardMapper.insertFile(file);
+					File saveFile = new File(file.getFile_path(), file.getFile_nm());
+					files[i].transferTo(saveFile);
+					savedFileList.add(saveFile);
+				}
+			}
+		} catch (Exception e) {
+			logger.error("insertBoard Error : ", e);
+			for (File file: savedFileList) {
+				file.delete();
+			}
+			throw new RuntimeException(e.getMessage());
+		}
+		
+	}
+	
+	public int deleteAttchFile(AttchFile attchFile) {
+		List<AttchFile> files = boardMapper.selectAttchFile(new MapX("bno", attchFile.getBno()).put("file_nm", attchFile.getFile_nm()).getMap());
+		AttchFile file = files.get(0);
+		int result = boardMapper.deleteFile(file);
+		if (result > 0) {
+			new File(file.getFile_path(), file.getFile_nm()).delete();
+		}
+		return result;
+	}
+	
 	
 }

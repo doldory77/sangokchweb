@@ -18,6 +18,8 @@
     <script src="/js/etc/Temp.js"></script>
     <script src="/js/util/Comm.js"></script>
     <script src="/js/comp/FileX.js"></script>
+    <script src="/js/comp/HeaderX.js"></script>
+    <script src="/js/board/BoardItemView.js"></script>
     <script src="/js/board/Board.js"></script>
     <script src="/js/board/BoardDetailView.js"></script>
     <script src="/js/menu01/Menu0101.js"></script>
@@ -55,7 +57,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
                                 <li><router-link class="dropdown-item" to="/menu0201">예배안내</router-link></li>
-                                <li><router-link class="dropdown-item" to="/menu0202">교회주보</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0202',query: {pageno:'1'}}">교회주보</router-link></li>
                                 <li><router-link class="dropdown-item" to="/menu0202">주일설교</router-link></li>  
                             </ul>
                         </li>
@@ -99,7 +101,7 @@
         routes: [
             {name:'Home', path:'/', component:Home},
             {name:'Temp', path:'/temp', component:Temp},
-            {name:'BoardDetailView', path:'/boardDetailView', component:BoardDetailView},
+            {name:'Board', path:'/board', component:BoardDetailView},
             {name:'Menu0101', path:'/menu0101', component:Menu0101},
             {name:'Menu0102', path:'/menu0102', component:Menu0102},
             {name:'Menu0103', path:'/menu0103', component:Menu0103},
@@ -142,6 +144,8 @@
     app.config.globalProperties.$http = http
     app.config.globalProperties.$comm = Comm
     app.component('md-file', FileX)
+    app.component('md-header', HeaderX)
+    app.component('bd-item', BoardItemView)
     app.use(router)
     app.mount('#app')
 </script>

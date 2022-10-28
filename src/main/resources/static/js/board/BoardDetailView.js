@@ -2,6 +2,7 @@ const BoardDetailView = {
   data() {
     return {
       imgPath:'http://localhost:8081/mng/file/',
+      noImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png',
       kind:null,
       bno:null,
       boardItem:{subject:'', content:'', attchFiles:[]},
@@ -27,7 +28,7 @@ const BoardDetailView = {
         console.log(result)
         if (result.data && result.data.result == 'success') {
           this.boardItem = result.data.data[0]
-          this.mnImg = this.boardItem.attchFiles.length > 0 ? this.imgPath + this.boardItem.attchFiles[0].file_nm : 'https://getbootstrap.kr/docs/5.2/examples/heroes/bootstrap-themes.png'
+          this.mnImg = this.boardItem.attchFiles.length > 0 ? this.imgPath + this.boardItem.attchFiles[0].file_nm : this.noImg
         }
       } catch (err) {
           console.error(err)
@@ -40,8 +41,8 @@ const BoardDetailView = {
   },
   template: `
     <div class="container col-xxl-8 px-4 py-5">
-      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-        <div class="col-10 col-sm-8 col-lg-6">
+      <div class="row flex-lg-row-reverse align-items-center g-1 py-5">
+        <div class="col-10 col-sm-10 col-lg-6">
 
           <img :src="mnImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
 

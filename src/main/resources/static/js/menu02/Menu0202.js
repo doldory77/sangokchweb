@@ -52,8 +52,8 @@ const Menu0202 = {
       
         <bd-item v-for="item in boardItems" :key="item.bno" :kind="'MENU0202'" :bno="item.bno" :subject="item.subject" :content="item.content"></bd-item>
 
-        <div v-if="nextYn == 'Y' ? true : false" class="d-flex mt-2 justify-content-center justify-content-lg-end">
-          <router-link class="btn btn-outline-primary col-8 col-lg-3" role="button" :to="{name: 'Menu0202', query: {pageno:pageNextNo}}">더보기</router-link>
+        <div v-if="nextYn == 'Y' ? true : false" class="d-flex mt-2 justify-content-center">
+          <router-link class="btn btn-outline-primary col-12 col-md-3" role="button" :to="{name: 'Menu0202', query: {pageno:pageNextNo}}">더보기</router-link>
         </div>
       </div>
     </main>

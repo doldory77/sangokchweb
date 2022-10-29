@@ -53,7 +53,7 @@ public class DefaultController {
 		
 		res.setData(boards);
 		if (params.containsKey("pageno")) {
-			String nextYn = boardService.selectBoardTotalCnt() > offset * Const.rowPerPage ? "Y" : "N";
+			String nextYn = boardService.selectBoardTotalCnt() > Integer.parseInt(params.get("pageno").toString()) * Const.rowPerPage ? "Y" : "N";
 			res.setNextYn(nextYn);
 			res.setPageno(nextYn.equals("Y") ? String.valueOf(Integer.valueOf(params.get("pageno").toString()) + 1) : params.get("pageno").toString());
 		}

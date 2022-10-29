@@ -56,9 +56,9 @@
                               예배
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                <li><router-link class="dropdown-item" to="/menu0201">예배안내</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0201',query: {kind:'MENU0201', isShowThumb:false}}">예배안내</router-link></li>
                                 <li><router-link class="dropdown-item" :to="{name:'Menu0202',query: {pageno:'1'}}">교회주보</router-link></li>
-                                <li><router-link class="dropdown-item" to="/menu0202">주일설교</router-link></li>  
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0203',query: {pageno:'1'}}">주일설교</router-link></li>  
                             </ul>
                         </li>
                         <li class="nav-item">

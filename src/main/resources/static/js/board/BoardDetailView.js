@@ -1,12 +1,11 @@
 const BoardDetailView = {
   data() {
     return {
-      imgPath:'http://localhost:8081/mng/file/',
-      noImg:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png',
       kind:null,
       bno:null,
       boardItem:{subject:'', content:'', attchFiles:[]},
-      mnImg:''
+      mnImg:'',
+      linkUrl:'',
     }
   },
   created() {
@@ -28,26 +27,40 @@ const BoardDetailView = {
         console.log(result)
         if (result.data && result.data.result == 'success') {
           this.boardItem = result.data.data[0]
-          this.mnImg = this.boardItem.attchFiles.length > 0 ? this.imgPath + this.boardItem.attchFiles[0].file_nm : this.noImg
+          this.mnImg = this.boardItem.attchFiles.length > 0 ? this.$comm.imgURL + this.boardItem.attchFiles[0].file_nm : this.$comm.noImgURL
+          this.linkUrl = this.boardItem.link_url || ''
         }
       } catch (err) {
           console.error(err)
           alert(err.response.data.msg)
       }
     },
+    errorImg(e) {
+      e.target.src = this.$comm.noImgURL
+    },
     chngImg(img) {
-      this.mnImg = this.imgPath + img
-    }
+      this.mnImg = this.$comm.imgURL + img
+    },
+    clickImg(e) {
+      if (this.linkUrl) {
+        window.open(this.linkUrl)
+      }
+    },
   },
   template: `
     <div class="container col-xxl-8 px-4 py-5">
       <div class="row flex-lg-row-reverse align-items-center g-1 py-5">
         <div class="col-10 col-sm-10 col-lg-6">
-
-          <img :src="mnImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        
+          <template v-if="linkUrl">
+            <img @click="clickImg" style="cursor:pointer;" @error="errorImg" :src="mnImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+          </template>
+          <template v-else>
+            <img @error="errorImg" :src="mnImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+          </template>
 
           <div class="d-flex flex-nowrap overflow-auto mt-3">
-            <img v-for="file in boardItem.attchFiles" :key="file.file_nm" :src="'http://localhost:8081/mng/file/' + file.file_nm" @click="chngImg(file.file_nm)" class="p-1" style="max-width:100px;">
+            <img @error="errorImg" v-for="file in boardItem.attchFiles" :key="file.file_nm" :src="$comm.imgURL + file.file_nm" @click="chngImg(file.file_nm)" class="p-1" style="max-width:100px; cursor:pointer;">
           </div>
 
         </div>

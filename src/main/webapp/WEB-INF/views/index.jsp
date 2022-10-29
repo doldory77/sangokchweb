@@ -20,7 +20,6 @@
     <script src="/js/comp/FileX.js"></script>
     <script src="/js/comp/HeaderX.js"></script>
     <script src="/js/board/BoardItemView.js"></script>
-    <script src="/js/board/Board.js"></script>
     <script src="/js/board/BoardDetailView.js"></script>
     <script src="/js/menu01/Menu0101.js"></script>
     <script src="/js/menu01/Menu0102.js"></script>
@@ -56,7 +55,7 @@
                               예배
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                <li><router-link class="dropdown-item" :to="{name:'Menu0201',query: {kind:'MENU0201', isShowThumb:false}}">예배안내</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0201',query: {kind:'MENU0201', thumbYn:'N'}}">예배안내</router-link></li>
                                 <li><router-link class="dropdown-item" :to="{name:'Menu0202',query: {pageno:'1'}}">교회주보</router-link></li>
                                 <li><router-link class="dropdown-item" :to="{name:'Menu0203',query: {pageno:'1'}}">주일설교</router-link></li>  
                             </ul>

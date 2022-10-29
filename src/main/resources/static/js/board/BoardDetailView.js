@@ -6,12 +6,15 @@ const BoardDetailView = {
       boardItem:{subject:'', content:'', attchFiles:[]},
       mnImg:'',
       linkUrl:'',
+      thumbYn:'Y',
+      tagYn:'N',
     }
   },
   created() {
     this.kind = this.$route.query.kind
     this.bno = this.$route.query.bno
-    console.log(this.kind, this.bno)
+    this.thumbYn = this.$route.query.thumbYn || 'Y'
+    console.log(this.kind, this.bno, this.thumbYn)
     if (this.kind && this.bno) {
       this.getBoardDtl()
     }
@@ -29,6 +32,7 @@ const BoardDetailView = {
           this.boardItem = result.data.data[0]
           this.mnImg = this.boardItem.attchFiles.length > 0 ? this.$comm.imgURL + this.boardItem.attchFiles[0].file_nm : this.$comm.noImgURL
           this.linkUrl = this.boardItem.link_url || ''
+          this.tagYn = this.boardItem.tag_yn
         }
       } catch (err) {
           console.error(err)
@@ -59,14 +63,20 @@ const BoardDetailView = {
             <img @error="errorImg" :src="mnImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
           </template>
 
-          <div class="d-flex flex-nowrap overflow-auto mt-3">
+          <div v-if="thumbYn == 'Y'" class="d-flex flex-nowrap overflow-auto mt-3">
             <img @error="errorImg" v-for="file in boardItem.attchFiles" :key="file.file_nm" :src="$comm.imgURL + file.file_nm" @click="chngImg(file.file_nm)" class="p-1" style="max-width:100px; cursor:pointer;">
           </div>
 
         </div>
         <div class="col-lg-6">
           <h1 class="display-5 fw-bold lh-1 mb-3">{{ boardItem.subject }}</h1>
-          <p class="lead">{{ boardItem.content }}</p>
+          <template v-if="tagYn == 'Y'">
+            <p class="lead" v-html="boardItem.content"></p>
+          </template>
+          <template v-else>
+            <p class="lead">{{ boardItem.content }}</p>
+          </template>
+          
           <div class="d-grid gap-2 d-md-flex justify-content-md-start">
             <!--<button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
             <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>-->

@@ -5,12 +5,13 @@ const Menu0201 = {
         boardItem:{subject:'', content:'', attchFiles:[]},
         mnImg:'',
         linkUrl:'',
-        isShowThumb: true,
+        thumbYn: 'N',
       }
     },
     created() {
       this.kind = this.$route.query.kind
-      this.isShowThumb = this.$route.query.isShowThumb
+      this.thumbYn = this.$route.query.thumbYn
+      console.log('xxxxxx', this.thumbYn)
       if (this.kind) {
         this.getBoard()
       }
@@ -58,7 +59,7 @@ const Menu0201 = {
               <img @error="errorImg" :src="mnImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
             </template>
 
-            <div v-if="isShowThumb" class="d-flex flex-nowrap overflow-auto mt-3">
+            <div v-if="thumbYn == 'Y'" class="d-flex flex-nowrap overflow-auto mt-3">
               <img @error="errorImg" v-for="file in boardItem.attchFiles" :key="file.file_nm" :src="$comm.imgURL + file.file_nm" @click="chngImg(file.file_nm)" class="p-1" style="max-width:100px; cursor:pointer;">
             </div>
   

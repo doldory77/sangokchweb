@@ -55,7 +55,7 @@ const BoardDetailView = {
     <div class="container col-xxl-8 px-4 py-5">
       <div class="row flex-lg-row-reverse align-items-center g-1 py-5">
         <div class="col-10 col-sm-10 col-lg-6">
-        
+          <template v-if="boardItem.attchFiles.length > 0">
           <template v-if="linkUrl">
             <img @click="clickImg" style="cursor:pointer;" @error="errorImg" :src="mnImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
           </template>
@@ -66,7 +66,7 @@ const BoardDetailView = {
           <div v-if="thumbYn == 'Y'" class="d-flex flex-nowrap overflow-auto mt-3">
             <img @error="errorImg" v-for="file in boardItem.attchFiles" :key="file.file_nm" :src="$comm.imgURL + file.file_nm" @click="chngImg(file.file_nm)" class="p-1" style="max-width:100px; cursor:pointer;">
           </div>
-
+          </template>
         </div>
         <div class="col-lg-6">
           <h1 class="display-5 fw-bold lh-1 mb-3">{{ boardItem.subject }}</h1>

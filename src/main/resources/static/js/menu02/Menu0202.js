@@ -50,7 +50,7 @@ const Menu0202 = {
       <div class="my-3 p-3 bg-body rounded shadow-sm">
         <h6 class="d-none border-bottom pb-2 mb-0">Suggestions</h6>
       
-        <bd-item v-for="item in boardItems" :key="item.bno" :kind="'MENU0202'" :bno="item.bno" :subject="item.subject" :content="item.content"></bd-item>
+        <bd-item v-for="item in boardItems" :key="item.bno" :kind="'MENU0202'" :bno="item.bno" :subject="item.subject" :content="item.content" :tagYn="item.tag_yn"></bd-item>
 
         <div v-if="nextYn == 'Y' ? true : false" class="d-flex mt-2 justify-content-center">
           <router-link class="btn btn-outline-primary col-12 col-md-3" role="button" :to="{name: 'Menu0202', query: {pageno:pageNextNo}}">더보기</router-link>

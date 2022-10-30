@@ -68,7 +68,7 @@
                               교제와나눔
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
-                                <li><router-link class="dropdown-item" to="/menu0401">교회소식</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0401',query: {pageno:'1'}}">교회소식</router-link></li>
                             </ul>
                         </li>
                     </ul>

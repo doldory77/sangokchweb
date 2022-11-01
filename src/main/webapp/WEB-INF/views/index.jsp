@@ -45,7 +45,7 @@
                               교회소개
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                                <li><router-link class="dropdown-item" to="/menu0101">우리교회는?</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0101',query: {kind:'MENU0101', thumbYn:'N'}}">우리교회는?</router-link></li>
                                 <li><router-link class="dropdown-item" to="/menu0102">교회섬김이</router-link></li>
                                 <li><router-link class="dropdown-item" :to="{name:'Menu0103',query: {kind:'MENU0103', thumbYn:'Y'}}">오시는 길</router-link></li>
                             </ul>

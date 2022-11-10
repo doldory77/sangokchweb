@@ -56,13 +56,13 @@ const Menu0101 = {
       },
     },
     template: `
-      <div class="container col-xxl-8 px-4 py-5">
+      <div class="container col-xxl-8 px-4 pt-5 position-relative">
         
-        <div v-for="item in boardItems" :key="item.bno" class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div v-for="item in boardItems" :key="item.bno" class="row flex-lg-row-reverse align-items-center g-5 pt-5">
           
           <div class="col-10 col-sm-10 col-lg-6">
           
-            <template v-if="linkUrl">
+            <!--<template v-if="linkUrl">
               <img @click="clickImg" style="cursor:pointer;" @error="errorImg" :src="item.mnImg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
             </template>
             <template v-else>
@@ -71,7 +71,7 @@ const Menu0101 = {
 
             <div v-if="thumbYn == 'Y'" class="d-flex flex-nowrap overflow-auto mt-3">
               <img @error="errorImg" v-for="file in item.attchFiles" :key="file.file_nm" :src="$comm.imgURL + file.file_nm" @click="chngImg(file.file_nm)" class="p-1" style="max-width:100px; cursor:pointer;">
-            </div>
+            </div>-->
   
           </div>
           <div class="col-lg-6">
@@ -83,7 +83,8 @@ const Menu0101 = {
             </div>
           </div>
         </div>
-
+        
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-right-bottom-to-top"></div>
       </div>    
     `
   }

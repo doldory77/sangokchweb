@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>산곡성결교회</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="/css/style.css"> -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <script src="https://unpkg.com/vue@3"></script>
     <script src="https://unpkg.com/vue-router@4"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -46,7 +46,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
                                 <li><router-link class="dropdown-item" :to="{name:'Menu0101',query: {kind:'MENU0101', thumbYn:'N'}}">우리교회는?</router-link></li>
-                                <li><router-link class="dropdown-item" to="/menu0102">교회섬김이</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0102',query: {kind:'MENU0102', thumbYn:'N'}}">교회섬김이</router-link></li>
                                 <li><router-link class="dropdown-item" :to="{name:'Menu0103',query: {kind:'MENU0103', thumbYn:'Y'}}">오시는 길</router-link></li>
                             </ul>
                         </li>

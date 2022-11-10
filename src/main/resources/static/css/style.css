@@ -25,3 +25,19 @@
     border-top: 1px solid;
     opacity: .25;
 }
+
+.bg-right-bottom-to-top {
+    background: linear-gradient(
+        to top,
+        rgba(255, 255, 255, 0) 5%,
+        rgba(255, 255, 255, 0.15) 15%,
+        rgba(255, 255, 255, 0.65) 55%,
+        rgba(255, 255, 255, 1) 85%,
+        rgba(255, 255, 255, 1) 100%
+    ),
+    url("/img/a.jpg");
+    z-index:-1; 
+    background-repeat: no-repeat; 
+    background-position: right bottom; 
+    border-radius:20px;
+}

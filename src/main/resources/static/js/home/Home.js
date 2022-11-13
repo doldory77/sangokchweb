@@ -1,104 +1,110 @@
 const Home = {
+    data() {
+        return {
+            boardItems: [],
+            topItems: [],
+            middleItems: [],
+            middle1Items: [],
+            middle2Items: [],
+        }
+    },
+    created() {
+        this.getBoard()
+    },
+    methods: {
+        async getBoard() {
+          try {
+            const result = await this.$http.post("/board/select", {kind_cd:'MENU0001'}, {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+            console.log(result)
+            if (result.data && result.data.result == 'success') {
+              this.boardItems = result.data.data
+                this.boardItems = this.boardItems.map((elem, idx, arr) => {
+                    elem.mnImg = elem.attchFiles.length > 0 ? this.$comm.imgURL + elem.attchFiles[0].file_nm : this.$comm.noImgURL
+                    elem.linkUrl = elem.link_url || ''
+                    return elem
+                })
+                this.topItems = this.boardItems.filter((elem => elem.attr1 === '홈상단'))
+                this.middleItems = this.boardItems.filter((elem => elem.attr1.indexOf('홈중간') > -1))
+                // this.middle1Items = this.boardItems.filter((elem => elem.attr1 === '홈중간1'))
+                // this.middle2Items = this.boardItems.filter((elem => elem.attr1 === '홈중간2'))
+                console.log(this.boardItems)
+            }
+          } catch (err) {
+              console.error(err)
+              alert(err.response.data.msg)
+          }
+        }
+    },
     template: `
         <div class="d-flex justify-content-center pt-md-5 bg-light">
-            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="max-width:800px;">
+            <div id="carousel1" class="carousel slide" data-bs-ride="carousel" style="max-width:800px;">
+                
                 <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button v-for="(item, idx) in topItems" :key="item.bno" type="button" data-bs-target="#carousel1" :data-bs-slide-to="idx" :class="{'active': idx === 0}" aria-current="true" :aria-label="'Slide' + (idx+1)"></button>
                 </div>
+
                 <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="/img/1.png" class="d-block w-100" alt="1.png">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
+                    <div v-for="(item, idx) in topItems" :key="item.bno" :class="{'carousel-item': true, 'active': idx === 0}">
+                        <img :src="item.mnImg" class="d-block w-100" alt="">
+                        <div class="carousel-caption d-none d-md-block" v-html="item.content"></div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="/img/2.png" class="d-block w-100" alt="2.png">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Some representative placeholder content for the second slide.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="/img/3.png" class="d-block w-100" alt="3.png">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Some representative placeholder content for the third slide.</p>
-                    </div>
-                </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+                
+                <template v-if="topItems.length > 1">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
                 </button>
+                </template>
             </div>
         </div>
         
         <div class="py-5 bg-light">
             <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-                    <div class="col">
+                <div v-if="middleItems.length > 0" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div v-for="(item, idx) in middleItems" :key="item.bno" class="col">
                         <div class="card shadow-sm">
-                            <!--<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
 
-                            <img src="/img/3.png" class="bd-placeholder-img card-img-top d-block w-100" alt="3.png">
+                            <img :src="item.mnImg" class="bd-placeholder-img card-img-top d-block w-100" alt="">
 
                             <div class="card-body">
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text" v-html="item.content"></p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                    </div>
-                                    <small class="text-muted">9 mins</small>
+                                    <!--<a href="#" class="btn btn-primary">{{ item.subject }}</a>-->
+                                    <router-link :to="item.linkUrl" class="btn btn-primary">{{ item.subject }}</router-link>
+                                    <small class="text-muted">[{{ item.attr1 }}]</small>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!--
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-    
-                            <div class="card-body">
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                    </div>
-                                    <small class="text-muted">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-    
-                            <div class="card-body">
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                    </div>
-                                    <small class="text-muted">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    -->                    
                 </div>
+
+                <!--<div v-if="middle2Items.length > 0" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div v-for="(item, idx) in middle2Items" :key="item.bno" class="col">
+                        <div class="card shadow-sm">
+
+                            <img :src="item.mnImg" class="bd-placeholder-img card-img-top d-block w-100" alt="">
+
+                            <div class="card-body">
+                                <p class="card-text" v-html="item.content"></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href="#" class="btn btn-primary">이동</a>
+                                    <small class="text-muted">[{{ item.attr1 }}]</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
             </div>
         </div>     
 `}

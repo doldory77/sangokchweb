@@ -23,14 +23,12 @@
 		FROM board a
 			, menu b
 		WHERE a.kind_cd = b.menu_cd
-		<if test='use_yn neq null and use_yn neq ""'>
-			AND use_yn = #{use_yn}
-		</if>
+			AND a.use_yn = 'Y'
 		<if test='bno neq null and bno gt 0'>
-			AND bno = #{bno}
+			AND a.bno = #{bno}
 		</if>
 		<if test='kind_cd neq null and kind_cd neq ""'>
-			AND kind_cd = #{kind_cd}
+			AND a.kind_cd = #{kind_cd}
 		</if>
 		ORDER BY ord asc, bno desc
 		<if test='pageno neq null and pageno neq ""'>

@@ -57,7 +57,7 @@ const Menu0101 = {
     },
     template: `
       <div class="container col-xxl-8 px-4 pt-5 position-relative">
-        
+        <div style="height:100px;"></div>
         <div v-for="item in boardItems" :key="item.bno" class="row flex-lg-row-reverse align-items-center g-5 pt-5">
           
           <div class="col-10 col-sm-10 col-lg-6">

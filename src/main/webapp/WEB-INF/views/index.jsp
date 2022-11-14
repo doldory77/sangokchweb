@@ -29,7 +29,7 @@
     <script src="/js/menu02/Menu0203.js"></script>
     <script src="/js/menu04/Menu0401.js"></script>
 </head>
-<body>
+<body class="bg-home">
     <div id="app" style="padding-top: 56px;">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -88,6 +88,9 @@
             <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
             <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.1/getting-started/introduction/">getting started guide</a>.</p>
         </div>
+        <audio autoplay controls>
+            <source src="/bgm/silent-night-new-version-12358.mp3" type="audio/mp3">
+        </audio>
     </footer>
 
 </body>

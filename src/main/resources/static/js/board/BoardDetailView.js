@@ -8,6 +8,7 @@ const BoardDetailView = {
       linkUrl:'',
       thumbYn:'Y',
       tagYn:'N',
+      externalYn:'N',
     }
   },
   created() {
@@ -33,6 +34,7 @@ const BoardDetailView = {
           this.mnImg = this.boardItem.attchFiles.length > 0 ? this.$comm.imgURL + this.boardItem.attchFiles[0].file_nm : this.$comm.noImgURL
           this.linkUrl = this.boardItem.link_url || ''
           this.tagYn = this.boardItem.tag_yn
+          this.externalYn = this.boardItem.external_yn
         }
       } catch (err) {
           console.error(err)

@@ -20,7 +20,7 @@ const Menu0102 = {
     methods: {
         async getBoard() {
           try {
-            const result = await this.$http.post("/board/select", {kind_cd:this.kind, pageno:'1'}, {
+            const result = await this.$http.post("/board/select", {kind_cd:this.kind}, {
                 headers: {
                     "Content-Type": "application/json",
                 }

@@ -37,10 +37,16 @@ const Home = {
               console.error(err)
               alert(err.response.data.msg)
           }
-        }
+        },
+        click(e) {
+            //console.log(e.target.href)
+            if (e.target.href) {
+              window.open(e.target.href)
+            }
+        },
     },
     template: `
-        <div class="d-flex justify-content-center pt-md-5 bg-light">
+        <div class="d-flex justify-content-center pt-md-5">
             <div id="carousel1" class="carousel slide" data-bs-ride="carousel" style="max-width:800px;">
                 
                 <div class="carousel-indicators">
@@ -67,7 +73,7 @@ const Home = {
             </div>
         </div>
         
-        <div class="py-5 bg-light">
+        <div class="py-5">
             <div class="container">
 
                 <div v-if="middleItems.length > 0" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -79,8 +85,12 @@ const Home = {
                             <div class="card-body">
                                 <p class="card-text" v-html="item.content"></p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <!--<a href="#" class="btn btn-primary">{{ item.subject }}</a>-->
+                                    <template v-if="item.external_yn === 'N'">
                                     <router-link :to="item.linkUrl" class="btn btn-primary">{{ item.subject }}</router-link>
+                                    </template>
+                                    <template v-else>
+                                    <a @click.prevent="click" :href="item.linkUrl" class="btn btn-primary">{{ item.subject }}</a>
+                                    </template>
                                     <small class="text-muted">[{{ item.attr1 }}]</small>
                                 </div>
                             </div>

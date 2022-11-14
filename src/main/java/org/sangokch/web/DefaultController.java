@@ -1,9 +1,7 @@
 package org.sangokch.web;
 
-import java.util.List;
 import java.util.Map;
 
-import org.sangokch.model.Board;
 import org.sangokch.model.ResponseData;
 import org.sangokch.service.BoardService;
 import org.sangokch.service.TestService;
@@ -49,11 +47,15 @@ public class DefaultController {
 			params.put("limit", Const.rowPerPage);
 			params.put("offset", offset);
 		}
-		List<Board> boards = boardService.selectBoard(params);
+		//List<Board> boards = boardService.selectBoard(params);
+		Map<String, Object> returnMap = boardService.selectBoardToMap(params);
 		
-		res.setData(boards);
+		//res.setData(boards);
+		res.setData(returnMap.get("list"));
 		if (params.containsKey("pageno")) {
-			String nextYn = boardService.selectBoardTotalCnt() > Integer.parseInt(params.get("pageno").toString()) * Const.rowPerPage ? "Y" : "N";
+			Integer cnt = Integer.valueOf(returnMap.get("totalCnt").toString());
+			//String nextYn = boardService.selectBoardTotalCnt() > Integer.parseInt(params.get("pageno").toString()) * Const.rowPerPage ? "Y" : "N";
+			String nextYn = cnt > Integer.parseInt(params.get("pageno").toString()) * Const.rowPerPage ? "Y" : "N";
 			res.setNextYn(nextYn);
 			res.setPageno(nextYn.equals("Y") ? String.valueOf(Integer.valueOf(params.get("pageno").toString()) + 1) : params.get("pageno").toString());
 		}

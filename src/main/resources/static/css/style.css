@@ -41,3 +41,12 @@
     background-position: right bottom; 
     border-radius:20px;
 }
+
+.bg-home {
+    background: linear-gradient(
+        rgba(255,255,255,0.6),
+        rgba(255,255,255,0.6)
+    ), url("/img/b2.jpg");
+    
+    background-size: cover;
+}

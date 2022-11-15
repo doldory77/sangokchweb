@@ -80,15 +80,15 @@
         
     </div>
 
-    <footer class="text-muted py-5">
+    <footer class="py-5 bg-light text-dark bg-opacity-50">
         <div class="container">
             <p class="float-end mb-1">
                 <a href="#">Back to top</a>
             </p>
-            <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
-            <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.1/getting-started/introduction/">getting started guide</a>.</p>
+            <p class="text-center fs-5 mb-1 ps-5">403020 인천광역시 부평구 길주로 326번길 13</p>
+            <p class="text-center fs-5 mb-0 pe-5">032) 513-3434 (Fax 겸용)</p>
         </div>
-        <audio autoplay controls>
+        <audio style="position:fixed; right:10px; bottom:10px;" autoplay controls>
             <source src="/bgm/silent-night-new-version-12358.mp3" type="audio/mp3">
         </audio>
     </footer>

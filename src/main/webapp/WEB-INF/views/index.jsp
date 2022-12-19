@@ -30,15 +30,17 @@
     <script src="/js/menu04/Menu0401.js"></script>
 </head>
 <body class="bg-home">
-    <div id="app" style="padding-top: 56px;">
+    <div id="app" style="padding-top: 56px; padding-bottom: 100px;">
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container-lg">
                 <a class="navbar-brand" href="#">
-                    <img src="/mng/img/logo_100.png" alt="Logo" width="32" height="32" class="d-inline-block align-text-top">
-                    산곡성결교회
+                    <img src="/img/logo_100.png" alt="Logo" width="32" height="32" class="d-inline-block align-text-top">
+                    <div style="display: inline-block; position: relative; width: 120px; padding-left: 3px;">
+                        <div style="position: absolute; top: -20px;">산곡성결교회</div>
+                    </div>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button id="navBarTogglerBtn" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -83,15 +85,15 @@
         
     </div>
 
-    <footer class="py-5 bg-light text-dark bg-opacity-50">
+    <footer class="py-2 bg-dark text-light" style="position: fixed; bottom: 0; width: 100vw; opacity: 85%;">
         <div class="container">
-            <p class="float-end mb-1">
-                <a href="#">Back to top</a>
+            <p class="float-end mb-1" style="width: 85px;">
+                <!-- <a href="#">Back to top</a> -->
             </p>
             <p class="text-center fs-5 mb-1 ps-5">403020 인천광역시 부평구 길주로 326번길 13</p>
             <p class="text-center fs-5 mb-0 pe-5">032) 513-3434 (Fax 겸용)</p>
         </div>
-        <audio style="position:fixed; right:10px; bottom:10px;" autoplay controls>
+        <audio style="position:fixed; left:10px; bottom:10px;" autoplay controls>
             <source src="/bgm/silent-night-new-version-12358.mp3" type="audio/mp3">
         </audio>
     </footer>
@@ -117,6 +119,13 @@
             {name:'Menu0401', path:'/menu0401', component:Menu0401},
             
         ]
+    })
+    router.beforeEach((to, from, next) => {
+        let wd = window.innerWidth || document.body.clientWidth
+        if (wd <= 991) {
+            if (document.getElementById("navBarTogglerBtn").getAttribute("aria-expanded") === 'true') document.getElementById("navBarTogglerBtn").click()
+        }
+        next()
     })
     const http = axios.create({
         // baseURL: "http://localhost:8080",

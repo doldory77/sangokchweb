@@ -50,3 +50,14 @@
     
     background-size: cover;
 }
+
+.bg-title {
+    font-family: 'Gamja Flower' !important; 
+    font-size: 4rem; position: absolute; 
+    color: white;
+    top: 50px;
+    width: 100%;
+    text-align: center; 
+    /* left: calc(100%/2 - 105px);  */
+    z-index: 99;
+}

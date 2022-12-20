@@ -6,6 +6,7 @@ const Home = {
             middleItems: [],
             middle1Items: [],
             middle2Items: [],
+            mainTitles: [],
         }
     },
     created() {
@@ -29,6 +30,7 @@ const Home = {
                 })
                 this.topItems = this.boardItems.filter((elem => elem.attr1 === '홈상단'))
                 this.middleItems = this.boardItems.filter((elem => elem.attr1.indexOf('홈중간') > -1))
+                this.mainTitles = this.boardItems.filter((elem => elem.attr1.indexOf('홈타이틀') > -1))
                 // this.middle1Items = this.boardItems.filter((elem => elem.attr1 === '홈중간1'))
                 // this.middle2Items = this.boardItems.filter((elem => elem.attr1 === '홈중간2'))
                 console.log(this.boardItems)
@@ -48,6 +50,8 @@ const Home = {
     template: `
         <div class="d-flex justify-content-center pt-md-5">
             <div id="carousel1" class="carousel slide" data-bs-ride="carousel" style="max-width:800px;">
+
+                <p class="bg-title">{{ mainTitles[0].content }}</p>
                 
                 <div class="carousel-indicators">
                     <button v-for="(item, idx) in topItems" :key="item.bno" type="button" data-bs-target="#carousel1" :data-bs-slide-to="idx" :class="{'active': idx === 0}" aria-current="true" :aria-label="'Slide' + (idx+1)"></button>
@@ -60,7 +64,7 @@ const Home = {
                     </div>
                 </div>
                 
-                <template v-if="topItems.length > 1">
+                <!--<template v-if="topItems.length > 1">
                 <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
@@ -69,7 +73,7 @@ const Home = {
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
-                </template>
+                </template>-->
             </div>
         </div>
         

@@ -91,15 +91,21 @@
 
     <footer class="py-2 bg-dark text-light" style="position: fixed; bottom: 0; width: 100vw; opacity: 85%;">
         <div class="container">
-            <p class="float-end mb-1" style="width: 85px;">
-                <!-- <a href="#">Back to top</a> -->
+            <!-- <p class="float-end mb-1" style="width: 85px;">
+                <a href="#">Back to top</a>
             </p>
-            <p class="text-center fs-5 mb-1 ps-5">403020 인천광역시 부평구 길주로 326번길 13</p>
-            <p class="text-center fs-5 mb-0 pe-5">032) 513-3434 (Fax 겸용)</p>
+            <p class="text-center fs-6 mb-1 ps-5">403020 인천광역시 부평구 길주로 326번길 13</p>
+            <p class="text-center fs-6 mb-0 pe-5">032) 513-3434 (Fax 겸용)</p> -->
+            <div class="row justify-content-sm-center text-center">
+                <div class="fs-6 col-12 col-sm-6 text-sm-end pe-sm-0">403020 인천광역시 부평구</div>
+                <div class="fs-6 col-12 col-sm-6 text-sm-start ps-sm-0">&nbsp;길주로 326번길 13</div>
+                <div class="fs-8 col-12 col-sm-6">032) 513-3434 (Fax 겸용)</div>
+            </div>
+
         </div>
-        <audio style="position:fixed; left:10px; bottom:10px;" autoplay controls>
+        <!-- <audio style="position:fixed; left:10px; bottom:10px;" autoplay controls>
             <source src="/bgm/silent-night-new-version-12358.mp3" type="audio/mp3">
-        </audio>
+        </audio> -->
     </footer>
 
 </body>

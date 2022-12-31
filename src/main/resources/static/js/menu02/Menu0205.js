@@ -1,8 +1,8 @@
-const Menu0203 = {
+const Menu0205 = {
     data() {
         return {
           boardItems:[],
-          kindCd:'MENU0203',
+          kindCd:'MENU0205',
           nextYn:'N',
           pageNo:'0',
           pageNextNo:'1',
@@ -45,7 +45,7 @@ const Menu0203 = {
     },  
     template: `
         <main class="container">
-          <md-header :title="'설교'"></md-header>
+          <md-header :title="'행사'"></md-header>
       
           <div class="my-3 p-3 bg-body rounded shadow-sm">
             <h6 class="d-none border-bottom pb-2 mb-0">Suggestions</h6>
@@ -56,9 +56,10 @@ const Menu0203 = {
             <template v-else="">
             <bd-item v-for="item in boardItems" :key="item.bno" :kind="'MENU0205'" :bno="item.bno" :subject="item.subject" :content="item.content" :tagYn="item.tag_yn" :thumbYn="'N'"></bd-item>
             </template>
+            
     
             <div v-if="nextYn == 'Y' ? true : false" class="d-flex mt-2 justify-content-center">
-              <router-link class="btn btn-outline-primary col-12 col-md-3" role="button" :to="{name: 'Menu0203', query: {pageno:pageNextNo}}">더보기</router-link>
+              <router-link class="btn btn-outline-primary col-12 col-md-3" role="button" :to="{name: 'MENU0205', query: {pageno:pageNextNo}}">더보기</router-link>
             </div>
           </div>
         </main>

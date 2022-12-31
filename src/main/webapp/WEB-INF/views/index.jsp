@@ -28,9 +28,13 @@
     <script src="/js/menu01/Menu0101.js"></script>
     <script src="/js/menu01/Menu0102.js"></script>
     <script src="/js/menu01/Menu0103.js"></script>
-    <script src="/js/menu02/Menu0201.js"></script>
-    <script src="/js/menu02/Menu0202.js"></script>
+    <script src="/js/menu01/Menu0104.js"></script>
+    <script src="/js/menu01/Menu0105.js"></script>
+    
     <script src="/js/menu02/Menu0203.js"></script>
+    <script src="/js/menu02/Menu0204.js"></script>
+    <script src="/js/menu02/Menu0205.js"></script>
+    <script src="/js/menu02/Menu0206.js"></script>
     <script src="/js/menu04/Menu0401.js"></script>
 </head>
 <body class="bg-home">
@@ -54,19 +58,23 @@
                               교회소개
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                                <li><router-link class="dropdown-item" :to="{name:'Menu0101',query: {kind:'MENU0101', thumbYn:'N'}}">우리교회는?</router-link></li>
-                                <li><router-link class="dropdown-item" :to="{name:'Menu0102',query: {kind:'MENU0102', thumbYn:'N'}}">교회섬김이</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0101',query: {kind:'MENU0101', thumbYn:'N'}}">산곡교회비전</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0104',query: {kind:'MENU0104', thumbYn:'N'}}">산곡교회연혁</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0102',query: {kind:'MENU0102', thumbYn:'N'}}">섬기는 분</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0105',query: {kind:'MENU0105', thumbYn:'N'}}">예배시간</router-link></li>
                                 <li><router-link class="dropdown-item" :to="{name:'Menu0103',query: {kind:'MENU0103', thumbYn:'Y'}}">오시는 길</router-link></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              예배
+                              예배찬양
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                <li><router-link class="dropdown-item" :to="{name:'Menu0201',query: {kind:'MENU0201', thumbYn:'N'}}">예배안내</router-link></li>
-                                <li><router-link class="dropdown-item" :to="{name:'Menu0202',query: {pageno:'1'}}">교회주보</router-link></li>
-                                <li><router-link class="dropdown-item" :to="{name:'Menu0203',query: {pageno:'1'}}">주일설교</router-link></li>  
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0203',query: {pageno:'1'}}">설교</router-link></li>  
+                                <!--<li><router-link class="dropdown-item" :to="{name:'Menu0204',query: {kind:'MENU0201', thumbYn:'N'}}">찬양</router-link></li>-->
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0204',query: {pageno:'1'}}">찬양</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0205',query: {pageno:'1'}}">행사</router-link></li>
+                                <li><router-link class="dropdown-item" :to="{name:'Menu0206',query: {pageno:'1'}}">특강</router-link></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -122,9 +130,14 @@
             {name:'Menu0101', path:'/menu0101', component:Menu0101},
             {name:'Menu0102', path:'/menu0102', component:Menu0102},
             {name:'Menu0103', path:'/menu0103', component:Menu0103},
-            {name:'Menu0201', path:'/menu0201', component:Menu0201},
-            {name:'Menu0202', path:'/menu0202', component:Menu0202},
+            {name:'Menu0104', path:'/menu0104', component:Menu0104},
+            {name:'Menu0105', path:'/menu0105', component:Menu0105},
+
             {name:'Menu0203', path:'/menu0203', component:Menu0203},
+            {name:'Menu0204', path:'/menu0204', component:Menu0204},
+            {name:'Menu0205', path:'/menu0205', component:Menu0205},
+            {name:'Menu0206', path:'/menu0206', component:Menu0206},
+            
             {name:'Menu03', path:'/menu03', component:Temp},
             {name:'Menu0401', path:'/menu0401', component:Menu0401},
             

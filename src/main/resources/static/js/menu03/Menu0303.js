@@ -1,8 +1,8 @@
-const Menu0401 = {
+const Menu0303 = {
     data() {
         return {
           boardItems:[],
-          kindCd:'MENU0401',
+          kindCd:'MENU0303',
           nextYn:'N',
           pageNo:'0',
           pageNextNo:'1',
@@ -45,7 +45,7 @@ const Menu0401 = {
     },  
     template: `
         <main class="container">
-          <md-header :title="'교회소식'"></md-header>
+          <md-header :title="'학생부'"></md-header>
       
           <div class="my-3 p-3 bg-body rounded shadow-sm">
             <h6 class="d-none border-bottom pb-2 mb-0">Suggestions</h6>
@@ -54,11 +54,11 @@ const Menu0401 = {
               <div>등록된 자료가 없습니다.</div>
             </template>
             <template v-else="">
-            <bd-item v-for="item in boardItems" :key="item.bno" :kind="'MENU0401'" :bno="item.bno" :subject="item.subject" :content="item.content" :tagYn="item.tag_yn" :thumbYn="'N'"></bd-item>
+            <bd-item v-for="item in boardItems" :key="item.bno" :kind="'MENU0303'" :bno="item.bno" :subject="item.subject" :content="item.content" :tagYn="item.tag_yn" :thumbYn="'N'"></bd-item>
             </template>
     
             <div v-if="nextYn == 'Y' ? true : false" class="d-flex mt-2 justify-content-center">
-              <router-link class="btn btn-outline-primary col-12 col-md-3" role="button" :to="{name: 'MENU0401', query: {pageno:pageNextNo}}">더보기</router-link>
+              <router-link class="btn btn-outline-primary col-12 col-md-3" role="button" :to="{name: 'MENU0303', query: {pageno:pageNextNo}}">더보기</router-link>
             </div>
           </div>
         </main>

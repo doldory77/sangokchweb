@@ -45,7 +45,7 @@ const Home = {
         },
     },
     template: `
-    
+
         <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
 
             <p class="bg-title">{{ mainTitles[0].content }}</p>
@@ -61,7 +61,7 @@ const Home = {
         
         <div class="py-5 container-xxl t-pos">
 
-            <div v-if="middleItems.length > 0" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div v-if="middleItems.length > 0" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 g-3">
                 <div v-for="(item, idx) in middleItems" :key="item.bno" class="col">
                     <div class="card shadow-sm">
                         <div class="card-header">

@@ -61,3 +61,29 @@
     /* left: calc(100%/2 - 105px);  */
     z-index: 99;
 }
+
+@media only screen and (min-width: 1400px) {
+    .t-pos {
+        margin-top: -400px;
+    }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .t-pos {
+        margin-top: -320px;
+    }
+}
+@media only screen and (min-width: 992px) and (max-width:1199px) {
+    .t-pos {
+        margin-top: -220px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .t-pos {
+        margin-top: -120px;
+    }
+}
+@media only screen and (min-width: 576px) and (max-width:767px) {
+    .t-pos {
+        margin-top: 0px;
+    }
+}

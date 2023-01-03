@@ -12,7 +12,7 @@ const Home = {
         this.getBoard()
     },
     mounted() {
-        setTimeout(() => { this.title = this.mainTitles[0].content }, 200)
+        
     },
     methods: {
         async getBoard() {
@@ -33,6 +33,7 @@ const Home = {
                 this.topItems = this.boardItems.filter((elem => elem.attr1 === '홈상단'))
                 this.middleItems = this.boardItems.filter((elem => elem.attr1.indexOf('홈중간') > -1))
                 this.mainTitles = this.boardItems.filter((elem => elem.attr1.indexOf('홈타이틀') > -1))
+                this.title = this.mainTitles[0].content
                 
                 console.log(this.boardItems)
             }

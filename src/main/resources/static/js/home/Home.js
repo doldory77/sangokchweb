@@ -5,10 +5,14 @@ const Home = {
             topItems: [],
             middleItems: [],
             mainTitles: [],
+            title: ''
         }
     },
     created() {
         this.getBoard()
+    },
+    mounted() {
+        setTimeout(() => { this.title = this.mainTitles[0].content }, 200)
     },
     methods: {
         async getBoard() {
@@ -46,14 +50,13 @@ const Home = {
     },
     template: `
 
+        <p class="bg-title mt-5">{{ title }}</p>
         <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
-
-            <p class="bg-title">{{ mainTitles[0].content }}</p>
 
             <div class="carousel-inner">
                 <div v-for="(item, idx) in topItems" :key="item.bno" :class="{'carousel-item': true, 'active': idx === 0}">
-                    <img :src="item.mnImg" class="d-block w-100" alt="">
-                    <div class="carousel-caption d-none d-md-block" v-html="item.content"></div>
+                    <img :src="item.mnImg" class="d-block w-100" alt="" data-bs-interval="1000">
+                    <div class="carousel-caption d-none d-sm-block" v-html="item.content"></div>
                 </div>
             </div>
                             

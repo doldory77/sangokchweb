@@ -68,9 +68,9 @@ const Menu0203 = {
           </div>-->
           
           <div class="row row-cols-1 row-cols-lg-2 px-3">
-            <div class="col d-flex p-2 bg-light border rounded shadow-sm" v-for="item in boardItems" :key="item.bno">
-              <div>
-                <div class="text-center">{{ item.write_dt.substring(0,10) }} 주일</div>
+            <div class="col d-flex p-2 bg-light border rounded shadow-sm flex-column-reverse flex-sm-row" v-for="item in boardItems" :key="item.bno">
+              <div class="text-center">
+                <div class="my-1">{{ item.write_dt.substring(0,10) }} 주일예배</div>
                 <a :href="item.link_url"><img :src="item.mnImg" style="max-width:200px;"></a>
               </div>
               <div class="flex-grow-1 ps-2">

@@ -31,6 +31,11 @@ const Menu0203 = {
             console.log(result)
             if (result.data && result.data.result == 'success') {
               this.boardItems = result.data.data
+              this.boardItems = this.boardItems.map((elem, idx, arr) => {
+                elem.mnImg = elem.attchFiles.length > 0 ? this.$comm.imgURL + elem.attchFiles[0].file_nm : this.$comm.noImgURL
+                elem.linkUrl = elem.link_url || ''
+                return elem
+            })
               this.nextYn = result.data.nextYn
               this.pageNextNo = result.data.pageno
             }
@@ -44,10 +49,10 @@ const Menu0203 = {
     
     },  
     template: `
-        <main class="container">
+        <main class="container-xxl">
           <md-header :title="'설교'"></md-header>
       
-          <div class="my-3 p-3 bg-body rounded shadow-sm">
+          <!--<div class="my-3 p-3 bg-body rounded shadow-sm">
             <h6 class="d-none border-bottom pb-2 mb-0">Suggestions</h6>
           
             <template v-if="boardItems.length == 0">
@@ -60,7 +65,21 @@ const Menu0203 = {
             <div v-if="nextYn == 'Y' ? true : false" class="d-flex mt-2 justify-content-center">
               <router-link class="btn btn-outline-primary col-12 col-md-3" role="button" :to="{name: 'Menu0203', query: {pageno:pageNextNo}}">더보기</router-link>
             </div>
+          </div>-->
+          
+          <div class="row row-cols-1 row-cols-lg-2 px-3">
+            <div class="col d-flex p-2 bg-light border rounded shadow-sm flex-column-reverse flex-sm-row" v-for="item in boardItems" :key="item.bno">
+              <div class="text-center">
+                <div class="my-1">{{ item.write_dt.substring(0,10) }} 주일예배</div>
+                <a :href="item.link_url"><img :src="item.mnImg" style="max-width:300px;"></a>
+              </div>
+              <div class="flex-grow-1 ps-2">
+                <div class="fs-6 fw-bolder mt-sm-4">{{ item.subject }}</div>
+                <div v-html="item.content"></div>
+              </div>
+            </div>
           </div>
+
         </main>
         `
 }

@@ -56,6 +56,30 @@
 <body class="bg-home">
     <div id="app" style="padding-top: 56px; padding-bottom: 100px;">
 
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalScrollableTitle">{{ searchText }}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p v-for="(item, idx) in searchItems" :key="idx">
+                    <template v-if="item.title">{{ item.verse + ' ' + item.content }}</template>
+                    <template v-else>
+                        <p v-if="idx === 0">{{ item.subject }}</p>
+                        <pre>{{ item.lyrics }}</pre>
+                    </template> 
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+              </div>
+            </div>
+        </div>        
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container-lg">
                 <a class="navbar-brand" href="#">
@@ -126,6 +150,10 @@
                             </ul>
                         </li>
                     </ul>
+                    <form class="d-flex ms-auto" role="search" v-on:submit.prevent="parseBibleHymn">
+                        <input v-model="searchText" class="form-control me-2" type="search" placeholder="성경구절 또는 찬송가" aria-label="성경구절 또는 찬송가">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
         </nav>
@@ -207,9 +235,46 @@
         data() {
             return {
                 message: 'Hello Vue!',
+                searchText: '',
+                searchItems: [],
             }
         },
         methods: {
+            parseBibleHymn() {
+                // console.log(this.searchText)
+                if (this.searchText) {
+                    let params = this.$comm.parseBibleHymn(this.searchText)
+                    if (params.kind) {
+                        this.search(params)
+                    }
+                }
+            },   
+            async search(params) {
+                try {
+                    const result = await this.$http.post("/search/bibleHymn", params, {
+                        headers: {
+                            "Content-Type": "application/json",
+                        }
+                    })
+                    // console.log(result)
+                    if (result.data && result.data.result == 'success') {
+                        // console.log(result.data.data)
+                        this.searchItems = result.data.data
+                        this.showModal()
+                    } else {
+                        this.searchItems = []
+                    }
+                } catch (err) {
+                    console.error(err)
+                    alert(err.response.data.msg)
+                }
+            },
+            showModal() {
+                if (this.searchItems && this.searchItems.length > 0) {
+                    let myModal = new bootstrap.Modal(document.getElementById('exampleModalScrollable'))
+                    myModal.show()
+                }
+            },                        
             change() {
                 this.message = 'Hello Vue Method!'
             },

@@ -1,8 +1,11 @@
 package org.sangokch.web;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.sangokch.model.ResponseData;
+import org.sangokch.service.BibleService;
 import org.sangokch.service.BoardService;
 import org.sangokch.service.TestService;
 import org.sangokch.util.Const;
@@ -25,6 +28,9 @@ public class DefaultController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	BibleService bibleService;
 	
 	private ResponseData getRes(String initResult) {
 		return new ResponseData(initResult);
@@ -60,6 +66,21 @@ public class DefaultController {
 			res.setPageno(nextYn.equals("Y") ? String.valueOf(Integer.valueOf(params.get("pageno").toString()) + 1) : params.get("pageno").toString());
 		}
 		
+		return res;
+	}
+	
+	@RequestMapping("/search/bibleHymn")
+	public @ResponseBody ResponseData bibleHymn(@RequestBody Map<String, Object> params) {
+		ResponseData res = getRes("success");
+		List<Map<String, Object>> list = null;
+		if (params.containsKey("kind") && params.get("kind").toString().equals("B")) {
+			list = bibleService.selectBibleList(params);
+		} else if (params.containsKey("kind") && params.get("kind").toString().equals("H")) {
+			list = bibleService.selectHymnList(params);
+		} else {
+			list = new ArrayList<>();
+		}
+		res.setData(list);
 		return res;
 	}
 	

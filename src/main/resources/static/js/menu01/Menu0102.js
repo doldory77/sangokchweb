@@ -59,17 +59,26 @@ const Menu0102 = {
         <div class="container px-4 pt-5 position-relative">
           
           <template v-for="item in boardItems" :key="item.bno">
-            <div v-if="item.attr1 == '담임목사'" class="card mb-5" style="max-width: 540;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img :src="item.mnImg" class="card-img-top" alt="인물사잔">
-                </div>
-                <div class="col-md-8">
+            <div v-if="item.attr1 == '담임목사'" class="row flex-sm-column-reverse">
+            
+              <div class="col-sm-5 d-flex justify-content-center">
+                <div class="card mb-5" style="width: 14rem;">
+                  <img :src="item.mnImg" class="card-img-top" alt="인물사진">
                   <div class="card-body">
                     <h5 class="card-title">{{ item.subject }}</h5>
                     <p class="card-text" v-html="item.content"></p>
                   </div>
-                </div>
+                </div>    
+              </div>
+              <div class="col-sm-7">
+                <div></div>
+                <ul>
+                  <li>AAA</li>
+                  <li>AAA</li>
+                  <li>AAA</li>
+                  <li>AAA</li>
+                  <li>AAA</li>
+                </ul>
               </div>
             </div>
           </template>
@@ -77,7 +86,7 @@ const Menu0102 = {
           <div class="d-flex justify-content-center flex-wrap mb-5">
             <template v-for="item in boardItems" :key="item.bno">
               <div v-if="item.attr1 == '교육전도사'" class="card m-2" style="width: 14rem;">
-                <img :src="item.mnImg" class="card-img-top" alt="인물사잔">
+                <img :src="item.mnImg" class="card-img-top" alt="인물사진">
                 <div class="card-body">
                   <h5 class="card-title">{{ item.subject }}</h5>
                   <p class="card-text" v-html="item.content"></p>
@@ -89,7 +98,7 @@ const Menu0102 = {
           <div class="d-flex justify-content-center flex-wrap">
             <template v-for="item in boardItems" :key="item.bno">
               <div v-if="item.attr1 == '장로'" class="card m-2" style="width: 14rem;">
-                <img :src="item.mnImg" class="card-img-top" alt="인물사잔">
+                <img :src="item.mnImg" class="card-img-top" alt="인물사진">
                 <div class="card-body">
                   <h5 class="card-title">{{ item.subject }}</h5>
                   <p class="card-text" v-html="item.content"></p>

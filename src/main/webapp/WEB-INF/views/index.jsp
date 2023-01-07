@@ -170,9 +170,9 @@
             <p class="text-center fs-6 mb-1 ps-5">403020 인천광역시 부평구 길주로 326번길 13</p>
             <p class="text-center fs-6 mb-0 pe-5">032) 513-3434 (Fax 겸용)</p> -->
             <div class="row justify-content-sm-center text-center">
-                <div class="fs-6 col-12 col-sm-6 text-sm-end pe-sm-0">403020 인천광역시 부평구</div>
+                <div class="fs-6 col-12 col-sm-6 text-sm-end pe-sm-0"><span style="font-size: 0.9rem;">21367</span> 인천광역시 부평구</div>
                 <div class="fs-6 col-12 col-sm-6 text-sm-start ps-sm-0">&nbsp;길주로 326번길 13</div>
-                <div class="fs-8 col-12 col-sm-6">032) 513-3434 (Fax 겸용)</div>
+                <div class="fs-8 col-12 col-sm-6"><span style="font-size: 0.9rem;">032)</span> 513-3434</div>
             </div>
 
         </div>

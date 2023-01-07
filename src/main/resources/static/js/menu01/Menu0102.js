@@ -56,13 +56,21 @@ const Menu0102 = {
         },
     },    
     template: `
-        <div class="container px-4 pt-5 position-relative">
-          
+        <div class="container-xxl px-4 pt-5 position-relative">
+
+          <div>
+            <p class="fs-4 fw-bold mb-1">섬기는 사람들</p>
+            <p class="fs-5 fw-bold text-muted">산곡성결교회를 섬기는 분들입니다.</p>
+          </div>
+
+          <div class="border-1 border-bottom border-secondary mb-2 mt-4">
+            <span class="fw-bold ps-1 text-secondary">담임목사</span>
+          </div>
           <template v-for="item in boardItems" :key="item.bno">
-            <div v-if="item.attr1 == '담임목사'" class="row flex-sm-column-reverse">
+            <div v-if="item.attr1 == '담임목사'" class="row flex-column-reverse flex-md-row">
             
-              <div class="col-sm-5 d-flex justify-content-center">
-                <div class="card mb-5" style="width: 14rem;">
+              <div class="col col-md-5 d-flex justify-content-center justify-content-md-end">
+                <div class="card mb-5" style="min-width: 14rem; max-width: 14rem;">
                   <img :src="item.mnImg" class="card-img-top" alt="인물사진">
                   <div class="card-body">
                     <h5 class="card-title">{{ item.subject }}</h5>
@@ -70,7 +78,7 @@ const Menu0102 = {
                   </div>
                 </div>    
               </div>
-              <div class="col-sm-7">
+              <div class="col col-md-7">
                 <div></div>
                 <ul>
                   <li>AAA</li>
@@ -83,9 +91,12 @@ const Menu0102 = {
             </div>
           </template>
           
+          <div class="border-1 border-bottom border-secondary mb-2 mt-4">
+            <span class="fw-bold ps-1 text-secondary">교역자</span>
+          </div>
           <div class="d-flex justify-content-center flex-wrap mb-5">
             <template v-for="item in boardItems" :key="item.bno">
-              <div v-if="item.attr1 == '교육전도사'" class="card m-2" style="width: 14rem;">
+              <div v-if="item.attr1 == '교육전도사'" class="card m-2 mx-md-4" style="width: 14rem;">
                 <img :src="item.mnImg" class="card-img-top" alt="인물사진">
                 <div class="card-body">
                   <h5 class="card-title">{{ item.subject }}</h5>
@@ -95,9 +106,12 @@ const Menu0102 = {
             </template>
           </div>         
 
+          <div class="border-1 border-bottom border-secondary mb-2 mt-4">
+            <span class="fw-bold ps-1 text-secondary">장로</span>
+          </div>
           <div class="d-flex justify-content-center flex-wrap">
             <template v-for="item in boardItems" :key="item.bno">
-              <div v-if="item.attr1 == '장로'" class="card m-2" style="width: 14rem;">
+              <div v-if="item.attr1 == '장로'" class="card m-2 mx-md-4" style="width: 14rem;">
                 <img :src="item.mnImg" class="card-img-top" alt="인물사진">
                 <div class="card-body">
                   <h5 class="card-title">{{ item.subject }}</h5>

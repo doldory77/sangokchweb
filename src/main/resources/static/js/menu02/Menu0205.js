@@ -63,10 +63,10 @@ const Menu0205 = {
       <main class="container-xxl">
         <md-header :title="'행사'"></md-header>
         
-        <div class="row g-2 row-cols-1 row-cols-lg-2 px-3">
+        <div class="row g-2 row-cols-1 px-3" :class="{'row-cols-lg-2': boardItems.length != 0}">
 
           <template v-if="boardItems.length == 0">
-          <div class="col d-flex p-2 border rounded shadow-lg">등록된 자료가 없습니다.</div>
+            <div class="col d-flex p-2 border rounded shadow-lg bg-light">등록된 자료가 없습니다.</div>
           </template>
 
           <template v-else>
@@ -84,7 +84,7 @@ const Menu0205 = {
           </div>
 
           <template v-if="nextYn == 'Y'">
-          <div class="col d-flex p-2 border rounded shadow-lg" @click="nextItem" role="button">더보기</div>
+          <div class="col d-flex p-2 border rounded shadow-lg bg-light" @click="nextItem" role="button">더보기</div>
           </template>
 
           </template>

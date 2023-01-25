@@ -87,7 +87,9 @@ const Menu0101 = {
         <div class="position-absolute top-0 start-0 w-100 h-100 bg-right-bottom-to-top"></div>
       </div>-->
 
-      <div v-for="(item, idx) in boardItems" :key="item.bno" v-html="item.content"></div>
+      <div class="pt-3 pt-lg-5 container-xxl">
+        <div v-for="(item, idx) in boardItems" :key="item.bno" v-html="item.content"></div>
+      </div>
 
     `
   }

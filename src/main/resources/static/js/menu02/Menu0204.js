@@ -65,30 +65,30 @@ const Menu0204 = {
 
           <div v-for="(item, idx) in topItems" :key="item.bno" v-html="item.content"></div>
       
-          <div class="row g-2 row-cols-1 row-cols-lg-2 px-3">
+          <div class="row g-2 row-cols-1 px-3" :class="{'row-cols-lg-2': boardItems.length != 0}">
 
             <template v-if="boardItems.length == 0">
-            <div class="col d-flex p-2 border rounded shadow-lg">등록된 자료가 없습니다.</div>
+              <div class="col d-flex p-2 border rounded shadow-lg bg-light">등록된 자료가 없습니다.</div>
             </template>
 
             <template v-else>
 
-            <div class="col" v-for="item in boardItems" :key="item.bno">
-              <div class="d-flex p-2 border rounded shadow-lg flex-column-reverse flex-sm-row">
-                <div class="text-center">
-                  <div class="my-1">{{ item.subject }}</div>
-                  <a :href="item.link_url"><img :src="item.mnImg" style="max-width:240px; max-height:135px;"></a>
-                </div>
-                <div class="flex-grow-1 ps-2">
-                  <div v-html="item.content"></div>
+              <div class="col" v-for="item in boardItems" :key="item.bno">
+                <div class="d-flex p-2 border rounded shadow-lg flex-column-reverse flex-sm-row">
+                  <div class="text-center">
+                    <div class="my-1">{{ item.subject }}</div>
+                    <a :href="item.link_url"><img :src="item.mnImg" style="max-width:240px; max-height:135px;"></a>
+                  </div>
+                  <div class="flex-grow-1 ps-2">
+                    <div v-html="item.content"></div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <template v-if="nextYn == 'Y'">
-            <div class="col d-flex p-2 border rounded shadow-lg" @click="nextItem" role="button">더보기</div>
             </template>
 
+            <template v-if="nextYn == 'Y'">
+              <div class="col d-flex p-2 border rounded shadow-lg bg-light" @click="nextItem" role="button">더보기</div>
             </template>
 
           </div>

@@ -53,8 +53,17 @@ const Menu0105 = {
       },
     },
     template: `
-
-      <div v-for="(item, idx) in boardItems" :key="item.bno" v-html="item.content"></div>
-
+      <div class="container-xxl px-4 pt-5 position-relative">
+        <div>
+          <p class="fs-4 fw-bold mb-1">예배시간</p>
+          <p class="fs-5 fw-bold text-muted">산곡교회 예배시간입니다.</p>
+        </div>
+        <div v-for="(item, idx) in boardItems" :key="item.bno">
+          <div class="row">
+            <div class="col-12 col-lg-8" v-html="item.content"></div>
+            <div class="col-12 col-lg-4"></div>
+          </div>
+        </div>
+      </div>
     `
   }

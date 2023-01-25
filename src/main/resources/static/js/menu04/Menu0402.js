@@ -51,7 +51,7 @@ const Menu0402 = {
     
     },  
     template: `
-        <main class="container">
+        <main class="container-lg">
           <md-header :title="'새가족'"></md-header>
       
           <div class="row g-2 row-cols-1 px-3" :class="{'row-cols-sm-2 row-cols-md-3 row-cols-lg-4': boardItems.length != 0}">
